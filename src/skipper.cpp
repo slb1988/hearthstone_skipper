@@ -56,9 +56,9 @@ void Skipper::skip() const {
                          }
                          std::string connection_to_kill;
                          for (auto obj : json_document["connections"].toArray()) {
-                             if (obj.isObject() && obj.toObject()["metadata"].toObject()["processPath"] ==
-                                 "/Applications/Hearthstone/Hearthstone.app/Contents/MacOS/Hearthstone" && obj.
-                                 toObject()["metadata"].toObject()["host"] == "") {
+                             if (obj.isObject() && obj.toObject()["metadata"].toObject()["processPath"].toString()
+                                 .endsWith("Hearthstone.app/Contents/MacOS/Hearthstone") &&
+                                 obj.toObject()["metadata"].toObject()["host"] == "") {
                                  connection_to_kill = obj.toObject()["id"].toString().toStdString();
                                  SPDLOG_LOGGER_INFO(_logger, "Connection to kill {}", connection_to_kill);
                              }
